@@ -21,7 +21,7 @@ def downloader_func(input_xlsx_file_str, save_dir_str):
     download(image__names_urls_dict,save_dir)
 
 def download(image__names_urls_dict,save_dir):
-    result.draw_Dialog()
+    result.draw_Dialog(3)
     for image_name, image_url in image__names_urls_dict.items():
         try:
             response_status, response = image_downloader.download_image(image_url)
@@ -38,7 +38,6 @@ def download(image__names_urls_dict,save_dir):
             image_save_path = image_downloader.touch_image_file(save_dir, image_name)
             image_downloader.save_image_to_file(response, image_save_path)
         except image_downloader.cantDownloadImage as e:
- #           print(type(e).__name__, e)
             print(str(e))
             result.add_result(json.dumps(str(e)))
             #add_result(e)

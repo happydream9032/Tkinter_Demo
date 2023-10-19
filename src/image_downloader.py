@@ -1,6 +1,7 @@
 from requests import get, Response
 from pathlib import Path
 from typing import Tuple
+import result
 
 class imageAlreadyExistsError(Exception):
     pass
@@ -62,7 +63,9 @@ def download_image(image_url:str) -> Tuple[int,Response|None]:
     ## Raises
     `cantDownloadImage` &rarr; if the image can't be downloaded.
     """
-    response = get(image_url)
+    headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36'}
+    result.add_result("image_url"+image_url)
+    response = get(image_url, headers=headers)
     if response.status_code == 200:
         return (200,response)
     elif response.status_code == 403:
