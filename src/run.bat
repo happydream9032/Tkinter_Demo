@@ -1,0 +1,1 @@
+start /B /MIN pythonw.exe total.py
